@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>REDDIT BUZZWORDS</title>
+    <script type="text/javascript"
+            src="{% static 'jquery-2.1.0.min.js' %}"
+    ></script>
+    <script> 
+        $(document).ready(function() {
+            var scores = [{% for word, score in scores %}['{{word}}',{{score}}],{% endfor %}[]];
+            scores.slice(0,10).forEach(function(score) {
+                $("#graph").append("<div>"+score[0]+"</div><hr style='background-color:black;width:"+600*score[1]/scores[0][1]+"px;'></hr><br/>");
+            });
+        });
+    </script>
+</head>
+
+<body style="text-align:center">
+<div id="graph"></div>
+{% for word, score in scores %}
+<div> {{word}}:{{score}}  </div>
+{% endfor %}
+</body>
+</html>
+    

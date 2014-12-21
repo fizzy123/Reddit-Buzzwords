@@ -41,4 +41,4 @@ def index(request):
     for key, val in score_dict.iteritems():
         scores.append([key, val])
 
-    return render(request, 'buzzwords/index.html', {'scores':sorted(scores, key=lambda score: score[1], reverse=True)[0:10], 'start':start, 'end':end})       
+    return render(request, 'buzzwords/index.html', {'scores':sorted(scores, key=lambda score: score[1], reverse=True)[0:30], 'start':start, 'end':end})

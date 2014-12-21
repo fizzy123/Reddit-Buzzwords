@@ -9,18 +9,23 @@
     <script> 
         $(document).ready(function() {
             var scores = [{% for word, score in scores %}['{{word}}',{{score}}],{% endfor %}[]];
-            scores.slice(0,10).forEach(function(score) {
-                $("#graph").append("<div>"+score[0]+"</div><hr style='background-color:black;width:"+600*score[1]/scores[0][1]+"px;'></hr><br/>");
+            scores.forEach(function(score) {
+                if (score[0]) {
+                    $("#graph").append("<div>"+ (scores.indexOf(score)+1)+'. '+score[0]+"</div><hr style='background-color:black;width:"+600*score[1]/scores[0][1]+"px;float:left;'></hr>"+score[1]+"<br/>");
+                }
             });
         });
     </script>
+    <link rel="stylesheet" href="{% static 'buzzwords.css' %}"/>
 </head>
 
-<body style="text-align:center">
+<body>
+<div id="header">
+<h1>Reddit Buzzwords</h1>
+<div id="subheader">Provides the most common words from the most popular reddit posts of each day.</div>
+</div>
 <div id="graph"></div>
-{% for word, score in scores %}
-<div> {{word}}:{{score}}  </div>
-{% endfor %}
+<div id="footer">Created by <a href='http://nobr.me/'>nobr</a></div>
 </body>
 </html>
     
